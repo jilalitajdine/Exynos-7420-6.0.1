@@ -183,7 +183,7 @@ cp -R ./system ${KERNELDIR}/output/$TARGET/
 cp -R ./META-INF ${KERNELDIR}/output/$TARGET/
 
 cd ${KERNELDIR}/output/$TARGET
-GETVER=`grep 'SkyHigh_TW_*v' ${KERNELDIR}/.config | sed 's/.*".//g' | sed 's/-S.*//g'`
+GETVER=`grep 'SkyHigh_MM_*v' ${KERNELDIR}/.config | sed 's/.*".//g' | sed 's/-S.*//g'`
 
 zip -r SM-$TARGET-kernel-${GETVER}-`date +[%y-%m-%d]`.zip .
 tar -H ustar -c boot.img > SM-$TARGET-kernel-${GETVER}-`date +[%y-%m-%d]`.tar
