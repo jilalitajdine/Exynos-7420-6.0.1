@@ -21,7 +21,7 @@ vnswap0)
 	mkswap $SWAP > /dev/null 2>&1
 	swapon $SWAP > /dev/null 2>&1
 	$BB sync;
-	$BB echo "130" > /proc/sys/vm/swappiness;
+	$BB echo "200" > /proc/sys/vm/swappiness;
 	echo 1 > $P
   fi; fi
   copy=$(cat $P)

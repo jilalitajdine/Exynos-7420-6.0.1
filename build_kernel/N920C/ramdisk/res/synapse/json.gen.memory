@@ -271,7 +271,7 @@ cat << CTAG
 	}},
 	{ SOptionList:{
 		title:"Virtual NAND Swap",
-		description:"VNSwap attempts to increase performance by avoiding paging on physical storage, instead using a compressed virtual device in RAM. Paging takes place in RAM until it is necessary to use the swap space on physical storage. Depending on the amount of swap currently in use, this process can take ~1 minute with Synapse being UNRESPONSIVE during this time. PLEASE WAIT for the process to finish.\n\n Disabling or Enabling will auto set swappiness to 0 or 130 respectively. Default is Enabled.\n",
+		description:"VNSwap attempts to increase performance by avoiding paging on physical storage, instead using a compressed virtual device in RAM. Paging takes place in RAM until it is necessary to use the swap space on physical storage. Depending on the amount of swap currently in use, this process can take ~1 minute with Synapse being UNRESPONSIVE during this time. PLEASE WAIT for the process to finish.\n\n Disabling or Enabling will auto set swappiness to 0 or 200 respectively. Default is Enabled.\n",
 		default:Enabled,
 		action:"swaps vnswap0",
 		values:[Disabled, Enabled,],
@@ -346,7 +346,7 @@ cat << CTAG
 	}},
 	{ SSeekBar:{
 		title:"swappiness",
-		description:"A low value means the kernel will try to avoid swapping as much as possible where a higher value instead will make the kernel aggressively try to use swap space. Default is 130.\n",
+		description:"A low value means the kernel will try to avoid swapping as much as possible where a higher value instead will make the kernel aggressively try to use swap space. Default is 200.\n",
 		max:200,
 		min:0,
 		step:10,
