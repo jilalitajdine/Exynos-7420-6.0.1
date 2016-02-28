@@ -27,7 +27,7 @@ cat << CTAG
 	}},
 	{ SPane:{
 		title:"Source",
-		description:"Modified & compiled from Samsung OSRC: <a href='https://github.com/UpInTheAir/SM-N920'>GitHub</a>."
+		description:"Modified & compiled from Samsung OSRC: <a href='https://github.com/UpInTheAir/Exynos-7420-6.0.1'>GitHub</a>."
 	}},
 	{ SSpacer:{
 		height:1
