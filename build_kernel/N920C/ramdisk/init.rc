@@ -1667,5 +1667,5 @@ service SkyHigh-init /sbin/SkyHigh.sh
     user root
     oneshot
 
-# SuperSU:PATCH:267
-# SuperSU:STOCK:194985606cad461c58c13389b9105ab044b75250
+# SuperSU:PATCH:268
+# SuperSU:STOCK:1e0b7162d7f8b28e01afdba38361680af720386e
