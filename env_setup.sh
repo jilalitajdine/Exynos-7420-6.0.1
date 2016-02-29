@@ -67,7 +67,12 @@ export SUB_ARCH=arm64;
 
 # SM-N920 C/CD/G/I
 if [ "$TARGET" = "N920C" ] ; then
-	export KERNEL_CONFIG="SkyHigh_N920C_defconfig";
+	read -p "Build with Clearwater audio mod? (y/n) > " audio
+	if [ "$audio" = "Y" -o "$audio" = "y" ]; then
+		export KERNEL_CONFIG="SkyHigh_N920C_defconfig";
+	else
+		export KERNEL_CONFIG="SkyHigh_N920C_no-audio_defconfig";
+	fi;
 fi;
 
 # build script
