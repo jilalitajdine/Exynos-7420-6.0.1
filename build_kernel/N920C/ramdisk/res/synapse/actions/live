@@ -263,6 +263,14 @@ gps)
                 echo UNSUPPORTED REGION
 	fi
   ;;
+check_cron)
+  CRON_SERVICE=$(pidof crond | wc -l);
+	if [ "$CRON_SERVICE" == 1 ]; then
+		echo "SERVICE ONLINE";
+	else
+		echo "SERVICE OFFLINE";
+	fi;
+  ;;
 check_cortex)
   CORTEX_CHECK=$(pgrep -f "/system/xbin/busybox sh /sbin/cortexbrain-tune.sh" | wc -l);
 	if [ "$CORTEX_CHECK" != 0 ]; then

@@ -11,6 +11,17 @@ $BB mount -o remount,rw /system
 setenforce 0
 
 
+# Setup for Cron Task
+if [ ! -d /data/.SkyHigh ]; then
+	$BB mkdir -p /data/.SkyHigh
+	$BB chmod -R 0777 /.SkyHigh/
+fi;
+# Copy Cron files
+$BB cp -a /res/crontab/ /data/
+chown 0:0 /data/crontab/cron-scripts/*
+chmod 777 /data/crontab/cron-scripts/*
+
+
 # Set correct r/w permissions for LMK parameters
 $BB chmod 666 /sys/module/lowmemorykiller/parameters/cost;
 $BB chmod 666 /sys/module/lowmemorykiller/parameters/adj;
@@ -105,6 +116,10 @@ if [ "$cortexbrain_background_process" == "1" ]; then
 	sleep 30
 	$BB nohup $BB sh /sbin/cortexbrain-tune.sh > /dev/null 2>&1 &
 fi;
+
+
+# Start CROND by tree root, so it's will not be terminated.
+$BB sh /res/crontab_service/service.sh > /dev/null 2>&1
 
 
 $BB mount -t rootfs -o remount,ro rootfs
