@@ -51,6 +51,7 @@ else
         echo ""
         echo "You need to define your device target!"
         echo "example: build_kernel.sh N920C"
+        echo "example: build_kernel.sh G928C"
         exit 1
 fi
 
@@ -73,6 +74,11 @@ if [ "$TARGET" = "N920C" ] ; then
 	else
 		export KERNEL_CONFIG="SkyHigh_N920C_no-audio_defconfig";
 	fi;
+fi;
+
+# SM-G928 C/F/G/I
+if [ "$TARGET" = "G928C" ] ; then
+	export KERNEL_CONFIG="SkyHigh_G928C_defconfig";
 fi;
 
 # build script
