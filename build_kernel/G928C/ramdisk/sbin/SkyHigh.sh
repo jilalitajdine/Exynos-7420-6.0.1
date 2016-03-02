@@ -18,8 +18,6 @@ if [ ! -d /data/.SkyHigh ]; then
 fi;
 # Copy Cron files
 $BB cp -a /res/crontab/ /data/
-chown 0:0 /data/crontab/cron-scripts/*
-chmod 777 /data/crontab/cron-scripts/*
 
 
 # Set correct r/w permissions for LMK parameters
@@ -119,7 +117,7 @@ fi;
 
 
 # Start CROND by tree root, so it's will not be terminated.
-$BB sh /res/crontab_service/service.sh > /dev/null 2>&1
+$BB nohup $BB sh /res/crontab_service/service.sh > /dev/null;
 
 
 $BB mount -t rootfs -o remount,ro rootfs

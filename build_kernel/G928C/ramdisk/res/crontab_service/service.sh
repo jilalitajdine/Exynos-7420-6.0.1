@@ -10,17 +10,20 @@ if [ "$ROOTFS_MOUNT" -eq "0" ]; then
 	$BB mount -o remount,rw /;
 fi;
 
-if [ "$($BB mount | grep system | grep -c ro)" -eq "1" ]; then
-	$BB mount -o remount,rw /system;
+if [ ! -e /data/crontab/ ]; then
+	$BB mkdir /data/crontab/;
 fi;
 
+$BB cp -a /res/crontab_service/cron-root /data/crontab/root;
+chown 0:0 /data/crontab/root;
+chmod 777 /data/crontab/root;
 if [ ! -d /var/spool/cron/crontabs ]; then
-	$BB mkdir -p /var/spool/cron/crontabs/;
+	mkdir -p /var/spool/cron/crontabs/;
 fi;
-$BB cp -a /res/crontab_service/cron-root /var/spool/cron/crontabs/root;
+$BB cp -a /data/crontab/root /var/spool/cron/crontabs/;
+
 chown 0:0 /var/spool/cron/crontabs/*;
 chmod 777 /var/spool/cron/crontabs/*;
-# NOTE: all cron tasks set in /res/crontab_service/cron-root
 
 # Check device local timezone & set for cron tasks
 timezone=$(date +%z);
@@ -108,11 +111,15 @@ fi;
 
 export TZ
 
+#Set Permissions to scripts
+chown 0:0 /data/crontab/cron-scripts/*;
+chmod 777 /data/crontab/cron-scripts/*;
+
 # use /var/spool/cron/crontabs/ call the crontab file "root"
 $BB nohup /system/xbin/crond -c /var/spool/cron/crontabs/ > /data/.SkyHigh/cron.txt &
 sleep 1;
 PIDOFCRON=$(pidof crond);
 echo "-900" > /proc/"$PIDOFCRON"/oom_score_adj;
 
+
 $BB mount -t rootfs -o remount,ro rootfs;
-$BB mount -o remount,ro /system;
