@@ -86,8 +86,8 @@ export USER=`whoami`;
 export TMPFILE=`mktemp -t`;
 
 
-# system compiler
-export CROSS_COMPILE=/home/upintheair/gcc-linaro-4.9-2015.02-3-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+# system compiler : UBERTC 5.3.1 20160201 https://bitbucket.org/UBERTC/aarch64-linux-android-5.3-kernel
+export CROSS_COMPILE=/home/upintheair/aarch64-linux-android-5.3-kernel/bin/aarch64-linux-android-
 
 
 # CPU Core
