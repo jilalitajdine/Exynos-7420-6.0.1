@@ -6,7 +6,7 @@ cat << CTAG
     elements:[
 	{ SPane:{
 		title:"HMP Thresholds up/down ratios for task migrating",
-		description:"Adjust HMP ratios for up/down scaling for tasks migrating from LITTLE > big domain and from big > LITTLE domain. Higher up-threshold values use less battery because use more Little domain."
+		description:"Adjust HMP ratios for up/down scaling for tasks migrating between A53 LITTLE cores and A57 big cores. Higher up-threshold values use less battery because use more of the power efficient Little cores."
 	}},
 	{ SSpacer:{
 		height:1
@@ -16,7 +16,7 @@ cat << CTAG
 		description:"Select your profile for HMP thresholds.\n",
 		default:$(echo "$(/res/synapse/actions/tuning hmp)"),
 		action:"tuning hmp",
-		values:[Default, Performance, Battery,],
+		values:[Default, Performance, Stock,],
 		notify:[
 			{
 				on:APPLY,
@@ -33,7 +33,7 @@ cat << CTAG
 	}},
 	{ SSeekBar:{
 		title:"HMP UP Thresholds",
-		description:"",
+		description:"Min load required for migrating tasks to the faster A57 big cores.\n",
 		min:1, max:1000, unit:"", step:1,
 		default:$(cat /sys/kernel/hmp/up_threshold),
 		action:"hmp /sys/kernel/hmp/up_threshold"
@@ -43,7 +43,7 @@ cat << CTAG
 	}},
 	{ SSeekBar:{
 		title:"HMP DOWN Thresholds",
-		description:"",
+		description:"Max load allowed for tasks migrating to the slower A53 little cores.\n",
 		min:1, max:512, unit:"", step:1,
 		default:$(cat /sys/kernel/hmp/down_threshold),
 		action:"hmp /sys/kernel/hmp/down_threshold"
