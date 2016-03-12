@@ -5,6 +5,9 @@ BB=/system/xbin/busybox;
 if [ "$($BB mount | grep rootfs | cut -c 26-27 | grep -c ro)" -eq "1" ]; then
 	$BB mount -o remount,rw /;
 fi;
+if [ "$($BB mount | grep system | grep -c ro)" -eq "1" ]; then
+	$BB mount -o remount,rw /system;
+fi;
 
 case $1 in
 tcp_security)
@@ -59,37 +62,63 @@ tcp_security)
   fi
   ;;
 dns)
-  P=/res/synapse/SkyHigh/dns
+  P=/res/synapse/SkyHigh/dns;
+  IPTABLES=/system/bin/iptables;
+  DNS_STATUS=$(cat /res/synapse/SkyHigh/dns);
   if [ ! -z "$2" ]; then
   if [ "$2" == Disabled ]; then
-    echo 0 > $P
-	setprop net.rmnet0.dns1 0.0.0.0
-	setprop net.rmnet0.dns2 0.0.0.0
+	if [ "$DNS_STATUS" != 0 ]; then
+		echo 0 > $P
+		# Flush/reset rules
+		$IPTABLES -F;
+		$IPTABLES -t nat -F;
+		$IPTABLES -F OUTPUT;
+	fi;
   elif [ "$2" == Google ]; then
     echo 1 > $P
-	setprop net.rmnet0.dns1 8.8.8.8
-	setprop net.rmnet0.dns2 8.8.8.4
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 8.8.4.4:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 8.8.4.4:53;
   elif [ "$2" == OpenDNS ]; then
     echo 2 > $P
-	setprop net.rmnet0.dns1 208.67.222.222
-	setprop net.rmnet0.dns2 208.67.220.220
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 208.67.222.222:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 208.67.222.222:53;
   elif [ "$2" == Comodo ]; then
     echo 3 > $P
-	setprop net.rmnet0.dns1 8.26.56.26
-	setprop net.rmnet0.dns2 8.20.247.20
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 8.26.56.26:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 8.26.56.26:53;
   elif [ "$2" == Level3 ]; then
     echo 4 > $P
-	setprop net.rmnet0.dns1 4.2.2.1
-	setprop net.rmnet0.dns2 4.2.2.2
-  elif [ "$2" == Norton_DNS ]; then
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 209.244.0.4:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 209.244.0.4:53;
+  elif [ "$2" == Norton ]; then
     echo 5 > $P
-	setprop net.rmnet0.dns1 198.153.192.1
-	setprop net.rmnet0.dns2 198.153.194.1
-  elif [ "$2" == Smart_Viper ]; then
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 199.85.127.10:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 199.85.127.10:53;
+  elif [ "$2" == Verisign ]; then
     echo 6 > $P
-	setprop net.rmnet0.dns1 208.76.50.50
-	setprop net.rmnet0.dns2 208.76.51.51
+	$IPTABLES -F;
+	$IPTABLES -t nat -F;
+	$IPTABLES -F OUTPUT;
+	$IPTABLES -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 64.6.64.6:53;
+	$IPTABLES -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 64.6.64.6:53;
   fi; fi
+
+# Re-direct 'Disabled' to 'Custom' to ensure any user set iptable entries not are flushed on Synapse start !
   copy=$(cat $P)
   if [ "$copy" == 0 ]; then
     echo Disabled
@@ -102,17 +131,12 @@ dns)
   elif [ "$copy" == 4 ]; then
     echo Level3
   elif [ "$copy" == 5 ]; then
-    echo Norton_DNS
+    echo Norton
   elif [ "$copy" == 6 ]; then
-    echo Smart_Viper
+    echo Verisign
   fi
   ;;
 gps_zone)
-
-if [ "$($BB mount | grep system | grep -c ro)" -eq "1" ]; then
-	$BB mount -o remount,rw /system;
-fi;
-
   P=/res/synapse/SkyHigh/gps_zone
   var_gps="/system/etc/gps.conf";
 
@@ -220,8 +244,6 @@ fi;
   elif [ "$copy" == 7 ]; then
     echo No_Action
   fi
-
-$BB mount -o remount,ro /system;
   ;;
 wifi_passwords_save)
   WIFI=/sdcard/SkyHigh/wifi;
@@ -268,3 +290,4 @@ IPv6)
 esac
 
 $BB mount -t rootfs -o remount,ro rootfs;
+$BB mount -o remount,ro /system;

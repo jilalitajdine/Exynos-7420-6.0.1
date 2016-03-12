@@ -38,22 +38,6 @@ cat << CTAG
 	{ SSpacer:{
 		height:1
 	}},
-	{ STitleBar:{
-		title:"Clean WIFI Lease"
-	}},
-	{ SDescription:{
-		description:"Clean WIFI DHCP IP Lease. Push the button to activate!"
-	}},
-	{ SSpacer:{
-		height:1
-	}},
-	{ SButton:{
-		label:"Clean WIFI Lease",
-		action:"devtools fix_wifi"
-	}},
-	{ SSpacer:{
-		height:1
-	}},
 	{ SPane:{
 		title:"WiFi Passwords",
 		description:"Save or restore your WiFi Passwords in /sdcard/SkyHigh/wifi/ folder."
@@ -207,14 +191,23 @@ cat << CTAG
 		height:1
 	}},
 	{ SPane:{
-		title:"3G DNS Tweaks",
-		description:"Allows you to set the default DNS (Domain Name System) for 3G connections. Use this to potentially speed up your browsing experience (depending on DNS location) and improve your security."
+		title:"DNS Tweaks",
+		description:"Allows you to set the default DNS (Domain Name System) for WiFi & mobile data 3/4G connections. Use this to potentially speed up your browsing experience (depending on DNS location) and improve your security."
 	}},
 	{ SSpacer:{
 		height:1
 	}},
 	{ SDescription:{
-		description:"NOTE: You must have a mobile data network connection before applying new DNS."
+		description:"1- Set Disable or your preferred DNS nameserver:"
+	}},
+	{ SDescription:{
+		description:"   a)  If using WiFi = Press 'Clean WIFI Lease' button."
+	}},
+	{ SDescription:{
+		description:"   b)  If using mobile data = manually restart the connection."
+	}},
+	{ SDescription:{
+		description:"2- Allow up to 30s for iptables to update before testing."
 	}},
 	{ SSpacer:{
 		height:1
@@ -228,10 +221,24 @@ cat << CTAG
 		height:1
 	}},
 	{ SOptionList:{
-		description:"Default is Disabled.\n",
 		default:$(echo "$(/res/synapse/actions/network dns)"),
 		action:"network dns",
-		values:[Disabled, Google, OpenDNS, Comodo, Level3, Norton_DNS, Smart_Viper,]
+		values:[Disabled, Google, OpenDNS, Comodo, Level3, Norton, Verisign,]
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SButton:{
+		label:"Clean WIFI Lease",
+		action:"devtools fix_wifi"
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SButton:{
+		label:"Test DNS connectivity",
+		action:"am start -a android.intent.action.VIEW -d https://dnsleaktest.com/ > /dev/null;
+		echo Opening browser...;"
 	}},
 	{ SSpacer:{
 		height:1
