@@ -35,6 +35,7 @@ user=intelligenceservice seinfo=platform domain=platform_app type=app_data_file 
 user=enhanced_features seinfo=platform domain=platform_app type=app_data_file levelFrom=user
 user=smds seinfo=platform domain=platform_app type=app_data_file levelFrom=user
 user=nsflp seinfo=platform domain=platform_app type=app_data_file levelFrom=user
+user=wechatwifiservice seinfo=platform domain=platform_app type=app_data_file levelFrom=user
 user=_app seinfo=spay domain=platform_app type=platform_app_data_file levelFrom=user
 user=spay seinfo=spay domain=platform_app type=platform_app_data_file
 user=system seinfo=spay domain=platform_app type=platform_app_data_file
