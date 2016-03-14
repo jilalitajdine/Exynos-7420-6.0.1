@@ -17,7 +17,7 @@ cat << CTAG
 		title:"Storage scheduler",
 		description:"Default is cfq.\n",
 		default:$(cat /sys/block/sda/queue/scheduler | $BB awk 'NR>1{print $1}' RS=[ FS=]),
-		action:"scheduler /sys/block/sda/queue/scheduler",
+		action:"ioset scheduler",
 		values:[`while read values; do $BB printf "%s, \n" $values | $BB tr -d '[]'; done < /sys/block/sda/queue/scheduler`],
 		notify:[
 			{
@@ -43,7 +43,7 @@ cat << CTAG
 		unit:" KB",
 		step:64,
 		default:$(cat /sys/block/sda/queue/read_ahead_kb),
-		action:"generic /sys/block/sda/queue/read_ahead_kb"
+		action:"ioset queue read_ahead_kb"
 	}},
 	{ SSpacer:{
 		height:1
@@ -59,7 +59,7 @@ cat << CTAG
 		title:"Add Random",
 		description:"Draw entropy from spinning (rotational) storage. Default is Disabled.\n",
 		default:0,
-		action:"generic /sys/block/sda/queue/add_random",
+		action:"ioset queue add_random",
 		values:{
 			0:"Disabled", 1:"Enabled"
 		}
@@ -71,7 +71,7 @@ cat << CTAG
 		title:"I/O Stats",
 		description:"Maintain I/O statistics for this storage device. Disabling will break I/O monitoring apps but reduce CPU overhead. Default is Disabled.\n",
 		default:0,
-		action:"generic /sys/block/sda/queue/iostats",
+		action:"ioset queue iostats",
 		values:{
 			0:"Disabled", 1:"Enabled"
 		}
@@ -83,7 +83,7 @@ cat << CTAG
 		title:"Rotational",
 		description:"Treat device as rotational storage. Default is Disabled.\n",
 		default:0,
-		action:"generic /sys/block/sda/queue/rotational",
+		action:"ioset queue rotational",
 		values:{
 			0:"Disabled", 1:"Enabled"
 		}
@@ -95,7 +95,7 @@ cat << CTAG
 		title:"No Merges",
 		description:"Types of merges (prioritization) the scheduler queue for this storage device allows. Default is All.\n",
 		default:0,
-		action:"generic /sys/block/sda/queue/nomerges",
+		action:"ioset queue nomerges",
 		values:{
 			0:"All", 1:"Simple Only", 2:"None"
 		}
@@ -107,7 +107,7 @@ cat << CTAG
 		title:"RQ Affinity",
 		description:"Try to have scheduler requests complete on the CPU core they were made from. Default is Aggressive.\n",
 		default:2,
-		action:"generic /sys/block/sda/queue/rq_affinity",
+		action:"ioset queue rq_affinity",
 		values:{
 			0:"Disabled", 1:"Enabled", 2:"Aggressive"
 		}
@@ -122,7 +122,7 @@ cat << CTAG
 		min:128,
 		max:2048,
 		default:$(cat /sys/block/sda/queue/nr_requests),
-		action:"generic /sys/block/sda/queue/nr_requests"
+		action:"ioset queue nr_requests"
 	}},
 	{ SSpacer:{
 		height:1

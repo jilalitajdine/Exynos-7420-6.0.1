@@ -26,6 +26,12 @@ $BB chmod 666 /sys/module/lowmemorykiller/parameters/adj;
 $BB chmod 666 /sys/module/lowmemorykiller/parameters/minfree;
 
 
+# Disable rotational storage for all blocks
+for i in /sys/block/*/queue; do
+        echo "0" > "$i"/rotational
+done
+
+
 # We need faster I/O so do not try to force moving to other CPU cores (dorimanx)
 for i in /sys/block/*/queue; do
         echo "2" > "$i"/rq_affinity
