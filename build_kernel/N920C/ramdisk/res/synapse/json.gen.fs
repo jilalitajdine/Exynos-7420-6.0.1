@@ -180,8 +180,13 @@ cat << CTAG
 		description:""
 	}},
 	{ SPane:{
-		title:"Wipe Junk Folders",
-		description:" * clipboard-cache\n * tombstones\n * anr logs\n * dropbox logs\n * lost+found"
+		title:"Wipe Junk Folders"
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SDescription:{
+		description:"Remove: clipboard-cache, tombstones, anr logs, dropbox logs & lost+found."
 	}},
 	{ SSpacer:{
 		height:1
@@ -189,6 +194,19 @@ cat << CTAG
 	{ SButton:{
 		label:"Clean up Junk",
 		action:"devtools clean_up"
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SDescription:{
+		description:"Remove useless scripts that interfere with kernel settings."
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SButton:{
+		label:"Clean init.d",
+		action:"devtools clean_initd"
 	}},
 	{ SSpacer:{
 		height:1

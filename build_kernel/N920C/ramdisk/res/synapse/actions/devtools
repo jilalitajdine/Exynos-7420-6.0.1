@@ -154,6 +154,12 @@ case $1 in
 	$BB sleep 1;
 	echo "Clean up done";
   ;;
+  clean_initd)
+	$BB rm -rf /system/etc/init.d/*
+	$BB sync;
+	$BB sleep 1;
+	echo "init.d folder cleaned";
+  ;;
 scr_cache)
   P=/res/synapse/SkyHigh/scr_cache
   if [ ! -z "$2" ]; then
