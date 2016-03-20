@@ -18,6 +18,13 @@ cat << CTAG
 		height:1
 	}},
 	{ SButton:{
+		label:"Hot Reboot Device",
+		action:"devtools hot_reboot"
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SButton:{
 		label:"Recovery Mode",
 		action:"devtools reboot recovery"
 	}},

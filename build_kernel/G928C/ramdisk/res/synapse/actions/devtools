@@ -17,6 +17,12 @@ case $1 in
 	$BB sleep 1;
 	reboot "$2";
   ;;
+  hot_reboot)
+	echo "0" > /sys/kernel/dyn_fsync/Dyn_fsync_active;
+	$BB sync;
+	$BB sleep 1;
+	pkill zygote
+  ;;
   cleardata)
 	echo "0" > /sys/kernel/dyn_fsync/Dyn_fsync_active;
 	am force-stop com.af.synapse 2> /dev/null;
