@@ -2,7 +2,6 @@
 # ADDITIONAL_DEFAULT_PROPERTIES
 #
 telephony.lteOnCdmaDevice=0
-persist.radio.multisim.config=dsds
 rild.libpath=/system/lib64/libsec-ril.so
 rild.libpath2=/system/lib64/libsec-ril-dsds.so
 persist.security.ams.enforcing=0
