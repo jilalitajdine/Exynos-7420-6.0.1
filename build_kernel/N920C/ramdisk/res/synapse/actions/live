@@ -230,8 +230,6 @@ usb_status)
   USB_STATUS=$(cat /sys/class/android_usb/android0/functions);
 	if [ "$USB_STATUS" == "mtp,acm,adb" ]; then
                 echo MTP MODE
-	elif [ "$USB_STATUS" == "midi,adb" ]; then
-                echo MIDI MODE
 	elif [ "$USB_STATUS" == "mass_storage,adb" ]; then
                 echo CD_ROM MODE
 	elif [ "$USB_STATUS" == "mtp,acm,adb,hid" ]; then

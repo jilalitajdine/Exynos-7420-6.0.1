@@ -24,12 +24,6 @@ cat << CTAG
 		action:"echo "
         }},
         { SLiveLabel:{
-		title:"MIDI",
-		description:"Use the connected device as a MIDI (Musical Instrument Digital Interface) player or input source.",
-		refresh:10000000,
-		action:"echo "
-        }},
-        { SLiveLabel:{
 		title:"CD_ROM",
 		description:"CD ROM emulation to mount iso images from device storage to PC.",
 		refresh:10000000,
@@ -67,7 +61,7 @@ cat << CTAG
 		description:"",
 		default:$(echo "$(/res/synapse/actions/storage usb_mode)"),
 		action:"storage usb_mode",
-		values:[DEFAULT, MTP, MIDI, CD_ROM, USB_KEYBOARD-MOUSE,]
+		values:[DEFAULT, MTP, CD_ROM, USB_KEYBOARD-MOUSE,]
 	}},
 	{ SSpacer:{
 		height:1
