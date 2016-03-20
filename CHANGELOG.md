@@ -1,5 +1,8 @@
 # Change Log
 
+## [v2.7](https://github.com/UpInTheAir/Exynos-7420-6.0.1/tree/v2.7) (2016-03-20)
+[Full Changelog](https://github.com/UpInTheAir/Exynos-7420-6.0.1/compare/v2.6...v2.7)
+
 ## [v2.6](https://github.com/UpInTheAir/Exynos-7420-6.0.1/tree/v2.6) (2016-03-15)
 [Full Changelog](https://github.com/UpInTheAir/Exynos-7420-6.0.1/compare/v2.5...v2.6)
 
