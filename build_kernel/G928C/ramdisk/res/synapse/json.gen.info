@@ -19,13 +19,6 @@ cat << CTAG
 		height:1
 	}},
 	{ SPane:{
-		title:"Special Features",
-		description:"Work-In-Progress......."
-	}},
-	{ SSpacer:{
-		height:1
-	}},
-	{ SPane:{
 		title:"Source",
 		description:"Modified & compiled from Samsung OSRC: <a href='https://github.com/UpInTheAir/Exynos-7420-6.0.1'>GitHub</a>."
 	}},
@@ -51,6 +44,17 @@ cat << CTAG
 		height:1
 	}},
 	{ SPane:{
+		title:"ASV Summary",
+		description:"Values: from 0 (Lowest) to 15 (Highest). The higher the ASV, the higher frequencies your device can run and lower voltages"
+	}},
+	{ SLiveLabel:{
+		refresh:10000,
+		action:"show asv"
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SPane:{
 		title:"Kernel Version"
 	}},
 	{ SLiveLabel:{
@@ -59,17 +63,6 @@ cat << CTAG
 	}},
 	{ SSpacer:{
 		height:1
-	}},
-	{ SPane:{
-		title:"ASV Summary",
-		description:"Values: from 0 (Lowest) to 15 (Highest). The higher the ASV, the higher frequencies your device can run and lower voltages"
-	}},
-	{ SSpacer:{
-		height:1
-	}},
-	{ SLiveLabel:{
-		refresh:10000,
-		action:"show asv"
 	}},
 	{ SPane:{
 		title:"Build"
