@@ -86,7 +86,7 @@ export USER=`whoami`;
 export TMPFILE=`mktemp -t`;
 
 
-# system compiler : UBERTC 5.3.1 20160201 https://bitbucket.org/UBERTC/aarch64-linux-android-5.3-kernel
+# system compiler : UBERTC 5.3.1 20160401 https://bitbucket.org/UBERTC/aarch64-linux-android-5.3-kernel
 export CROSS_COMPILE=/home/upintheair/aarch64-linux-android-5.3-kernel/bin/aarch64-linux-android-
 
 
