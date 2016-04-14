@@ -185,18 +185,10 @@ cp -R ./META-INF ${KERNELDIR}/output/$TARGET/
 cd ${KERNELDIR}/output/$TARGET
 GETVER=`grep 'SkyHigh_MM_*v' ${KERNELDIR}/.config | sed 's/.*".//g' | sed 's/-S.*//g'`
 
-# Without Clearwater audio mod
-AUDIO=`grep '# CONFIG_SND_SOC_ARIZONA_CONTROL*' ${KERNELDIR}/.config | sed 's/.*".//g' | sed 's/-S.*//g'`
-if [ "$AUDIO" == "# CONFIG_SND_SOC_ARIZONA_CONTROL is not set" ]; then
-	AUDIO="no-audio"
-else
-	AUDIO=""
-fi
-
-zip -r SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.zip .
-tar -H ustar -c boot.img > SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.tar
-md5sum -t SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.tar >> SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.tar
-mv SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.tar SM-$TARGET-$AUDIO-kernel-${GETVER}-`date +[%y-%m-%d]`.tar.md5
+zip -r SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.zip .
+tar -H ustar -c boot.img > SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar
+md5sum -t SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar >> SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar
+mv SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar.md5
 
 echo
 echo "Done"
