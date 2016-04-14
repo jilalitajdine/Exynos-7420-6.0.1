@@ -8,7 +8,6 @@
 # So, rilcarrier is imported after common rc, like init.rilchip.rc
 import /init.rilchip.rc
 import /init.rilcarrier.rc
-import /init.rilepdg.rc
 
 on boot
 
