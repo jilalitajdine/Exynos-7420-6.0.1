@@ -296,6 +296,7 @@ saccessory_manager                          u:object_r:system_service:s0
 samsung_overlay                             u:object_r:system_service:s0
 SatsService                                 u:object_r:system_service:s0
 sb_service                                  u:object_r:system_service:s0
+hongbao_mode_service                        u:object_r:system_service:s0
 sec.clipboard                               u:object_r:system_service:s0
 sec.clipboard0                              u:object_r:system_service:s0
 sec.clipboard1                              u:object_r:system_service:s0

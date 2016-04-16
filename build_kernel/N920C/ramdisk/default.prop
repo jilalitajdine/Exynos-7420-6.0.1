@@ -20,9 +20,9 @@ debug.atrace.tags.enableflags=0
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Fri Feb 26 17:23:36 KST 2016
-ro.bootimage.build.date.utc=1456475016
-ro.bootimage.build.fingerprint=samsung/nobleltejv/noblelte:6.0.1/MMB29K/N920CXXU2BPBA:user/test-keys
+ro.bootimage.build.date=Fri Apr 1 22:10:41 KST 2016
+ro.bootimage.build.date.utc=1459516241
+ro.bootimage.build.fingerprint=samsung/noblelteub/noblelte:6.0.1/MMB29K/N920GUBS2BPD1:user/test-keys
 
 # Keep WIFI settings on flash/reboot
 ro.securestorage.support=false

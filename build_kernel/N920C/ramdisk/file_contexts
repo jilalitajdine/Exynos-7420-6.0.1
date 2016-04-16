@@ -1022,6 +1022,13 @@
 /sys/class/kgsl/kgsl-3d0/dispatch(/.*)?     --            u:object_r:sysfs_ss_writable:s0
 /sys/class/power_supply/battery/camera                    u:object_r:sysfs_app_writable:s0
 
+#line 1 "vendor/samsung/common/sepolicy/slsi_common/file_contexts"
+
+## CP daemon
+/system/bin/rild_exynos         u:object_r:rild_exec:s0
+/system/bin/rild_SIPC           u:object_r:rild_exec:s0
+/system/bin/dmd                 u:object_r:dmd_exec:s0
+
 #line 1 "vendor/samsung/common/sepolicy/marvell_common/file_contexts"
 
 ## SEC added ##
@@ -1756,7 +1763,8 @@
 # EFS file of slsi_common
 #
 /efs/nv_data\.bin(.*)	u:object_r:bin_nv_data_efs_file:s0
-/efs/nv.log                     u:object_r:cbd_log_data:s0
+/efs/nv_fsm_data\.bin           u:object_r:bin_nv_data_efs_file:s0
+/efs/nv\.log                     u:object_r:cbd_log_data:s0
 
 ############################# 
 # MISC partition file of sec_common
