@@ -179,8 +179,10 @@ echo
 echo "${bldcya}***** Make archives *****${txtrst}"
 
 cp ./$TARGET/boot.img ${KERNELDIR}/output/$TARGET/
-cp -R ./system ${KERNELDIR}/output/$TARGET/
+cp -R ./busybox ${KERNELDIR}/output/$TARGET/
 cp -R ./META-INF ${KERNELDIR}/output/$TARGET/
+cp -R ./supersu ${KERNELDIR}/output/$TARGET/
+cp -R ./system ${KERNELDIR}/output/$TARGET/
 
 cd ${KERNELDIR}/output/$TARGET
 GETVER=`grep 'SkyHigh_MM_*v' ${KERNELDIR}/.config | sed 's/.*".//g' | sed 's/-S.*//g'`
