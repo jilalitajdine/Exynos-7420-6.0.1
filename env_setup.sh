@@ -55,6 +55,7 @@ else
         echo "example: build_kernel.sh N920T"
         echo "example: build_kernel.sh N9200"
         echo "example: build_kernel.sh G928C"
+        echo "example: build_kernel.sh G928T"
         exit 1
 fi
 
@@ -92,6 +93,11 @@ fi;
 # SM-G928 C/F/G/I
 if [ "$TARGET" = "G928C" ] ; then
 	export KERNEL_CONFIG="SkyHigh_G928C_defconfig";
+fi;
+
+# SM-G928 T/W8
+if [ "$TARGET" = "G928T" ] ; then
+	export KERNEL_CONFIG="SkyHigh_G928T_defconfig";
 fi;
 
 # build script
