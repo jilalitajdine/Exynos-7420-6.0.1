@@ -255,7 +255,7 @@ cat << CTAG
 	}},
 	{ SSeekBar:{
 		title:"ZSwap memory pool",
-		description:"ZSwap memory pool percentage of main memory that may be used as compressed page cache. Default is 20.\n",
+		description:"ZSwap memory pool percentage of main memory that may be used as compressed page cache. Default is 50.\n",
 		min:0, max:50, unit:" %", step:1,
 		default:$(cat /sys/module/zswap/parameters/max_pool_percent),
 		action:"generic /sys/module/zswap/parameters/max_pool_percent"
