@@ -21,9 +21,9 @@ if [ "$FSTRIM" == 1 ]; then
 		sleep 30;
 	done;
 
-	/sbin/fstrim -v /system
-	/sbin/fstrim -v /data
-	/sbin/fstrim -v /cache
+	/system/xbin/fstrim -v /system
+	/system/xbin/fstrim -v /data
+	/system/xbin/fstrim -v /cache
 
 	$BB sync
 
