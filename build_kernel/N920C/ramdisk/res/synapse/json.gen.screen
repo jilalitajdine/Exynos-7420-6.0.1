@@ -37,6 +37,24 @@ cat << CTAG
 	{ SSpacer:{
 		height:1
 	}},
+	{ SPane:{
+		title:"Negative Effect Toggle",
+		description:"Toggle by quickly tapping the multi-tasking button x4. This may not work on edge variants."
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SOptionList:{
+		description:" ",
+		default:0,
+		action:"generic /sys/module/mdnie_lite/parameters/elable_toggle_negative",
+		values:{
+			0:"Disabled", 1:"Enabled"
+		}
+	}},
+	{ SSpacer:{
+		height:1
+	}},
     ]
 }
 CTAG
