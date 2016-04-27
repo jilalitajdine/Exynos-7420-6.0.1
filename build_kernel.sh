@@ -112,7 +112,15 @@ if [ -e $KERNELDIR/arch/arm64/boot/Image ]; then
 	./utilities/dtbtool -o dt.img -s 2048 -p ./scripts/dtc/dtc ./arch/arm64/boot/dts/
 else
 	echo "${bldred}Kernel STUCK in BUILD!${txtrst}"
-	exit 0;
+	echo
+	while true; do
+		read -p "Do you want to run a Make command to check the error?  (y/n) > " yn
+		case $yn in
+			[Yy]* ) make Image ARCH=arm64; echo ; exit;;
+			[Nn]* ) echo; exit;;
+			* ) echo "Please answer yes or no.";;
+		esac
+	done
 fi;
 
 echo
