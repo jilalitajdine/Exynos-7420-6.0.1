@@ -20,12 +20,6 @@
 
 ############################################ SETUP ############################################
 
-# Time of build startup
-res1=$(date +%s.%N)
-
-echo
-echo "${bldcya}***** Setting up Environment *****${txtrst}";
-echo
 . ./env_setup.sh ${1} || exit 1;
 
 if [ ! -f $KERNELDIR/.config ]; then
@@ -114,7 +108,7 @@ else
 	echo "${bldred}Kernel STUCK in BUILD!${txtrst}"
 	echo
 	while true; do
-		read -p "Do you want to run a Make command to check the error?  (y/n) > " yn
+		read -p "${grn}Do you want to run a Make command to check the error?  (y/n) > ${txtrst}" yn
 		case $yn in
 			[Yy]* ) make Image ARCH=arm64; echo ; exit;;
 			[Nn]* ) echo; exit;;
@@ -141,9 +135,9 @@ for i in $(find "$KERNELDIR" -name '*.ko'); do
 done;
 
 if [ -f "./$BK/system/lib/modules/*" ]; then
-chmod 0755 ./$BK/system/lib/modules/*
-${CROSS_COMPILE}strip --strip-debug ./$BK/system/lib/modules/*.ko
-${CROSS_COMPILE}strip --strip-unneeded ./$BK/system/lib/modules/*
+	chmod 0755 ./$BK/system/lib/modules/*
+	${CROSS_COMPILE}strip --strip-debug ./$BK/system/lib/modules/*.ko
+	${CROSS_COMPILE}strip --strip-unneeded ./$BK/system/lib/modules/*
 fi;
 
 # fix ramdisk permissions
@@ -166,19 +160,19 @@ echo "Done"
 
 echo
 echo "${bldcya}***** Make boot.img *****${txtrst}"
-
-read -p "Do you want to use a stock (s) or custom generated (c) dt.img? (s/c) > " dt
+echo
+read -p "${grn}Do you want to use a stock (s) or custom generated (c) dt.img? (s/c) > ${txtrst}" dt
 echo
 if [ "$dt" = "c" -o "$dt" = "C" ]; then
-./mkbootimg --kernel ./$TARGET/Image --dt ${KERNELDIR}/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img
-fi
+	./mkbootimg --kernel ./$TARGET/Image --dt ${KERNELDIR}/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
+	echo "Build with custom dt.img";
+fi;
 if [ "$dt" = "s" -o "$dt" = "S" ]; then
-./mkbootimg --kernel ./$TARGET/Image --dt ./$TARGET/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img
-fi
+	./mkbootimg --kernel ./$TARGET/Image --dt ./$TARGET/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
+	echo "Build with stock dt.img";
+fi;
 
 echo -n "SEANDROIDENFORCE" >> ./$TARGET/boot.img
-
-echo "Done"
 
 
 ###################################### ARCHIVE GENERATION #####################################
@@ -201,24 +195,27 @@ md5sum -t SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar >> SM-$TARGET--ker
 mv SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar SM-$TARGET--kernel-${GETVER}-`date +[%y-%m-%d]`.tar.md5
 
 echo
-echo "Done"
+echo "${bldred}$TARGET${txtrst} ${red}build completed !!${txtrst}"
 
 
 #################################### OPTIONAL SOURCE CLEAN ####################################
 
 echo
 echo "${bldcya}***** Clean source *****${txtrst}"
-
+echo
 cd ${KERNELDIR}
-read -p "Do you want to Clean the source? (y/n) > " mc
-if [ "$mc" = "Y" -o "$mc" = "y" ]; then
-	xterm -e make clean
-	xterm -e make mrproper
-fi
+read -p "${grn}Make clean source? (y/n) > ${txtrst}";
+if [ "$REPLY" == "y" ]; then
+	make clean;
+	make distclean;
+	make mrproper;
+	echo;
+	echo "Source cleaned";
+else
+	echo "Source not cleaned";
+fi;
 
 echo
-echo "Build completed"
-echo
-echo "${txtbld}***** Flashable zip found in output directory *****${txtrst}"
+echo "${bldcya}***** Flashable zip found in /output/$TARGET directory *****${txtrst}"
 echo
 # build script ends
