@@ -25,22 +25,9 @@ if [ ! -e /usr/bin/xmllint ]; then
 	sudo apt-get install libxml2-utils
 fi;
 
+
 echo
 echo "${bldcya}***** Clean up Environment before compile *****${txtrst}";
-
-
-# make clean source
-echo
-read -p "${grn}Make clean source? (y/n) > ${txtrst}";
-if [ "$REPLY" == "y" ]; then
-	make clean;
-	make distclean;
-	make mrproper;
-	echo
-	echo "Source cleaned";
-else
-	echo "Source not cleaned";
-fi;
 
 
 # reset current local branch to gitHub repo
@@ -56,6 +43,20 @@ if [ "$REPLY" == "y" ]; then
 	echo "Local branch reset to $BRANCH";
 else
 	echo "Local branch not reset";
+fi;
+
+
+# make clean source
+echo
+read -p "${grn}Make clean source? (y/n) > ${txtrst}";
+if [ "$REPLY" == "y" ]; then
+	make clean;
+	make distclean;
+	make mrproper;
+	echo
+	echo "Source cleaned";
+else
+	echo "Source not cleaned";
 fi;
 
 
