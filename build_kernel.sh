@@ -164,11 +164,11 @@ echo
 read -p "${grn}Do you want to use a stock (s) or custom generated (c) dt.img? (s/c) > ${txtrst}" dt
 echo
 if [ "$dt" = "c" -o "$dt" = "C" ]; then
-	./mkbootimg --kernel ./$TARGET/Image --dt ${KERNELDIR}/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
+	./mkbootimg --kernel ./$TARGET/Image --dt ${KERNELDIR}/dt.img --board $board --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
 	echo "Build with custom dt.img";
 fi;
 if [ "$dt" = "s" -o "$dt" = "S" ]; then
-	./mkbootimg --kernel ./$TARGET/Image --dt ./$TARGET/dt.img --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
+	./mkbootimg --kernel ./$TARGET/Image --dt ./$TARGET/dt.img --board $board --ramdisk ./$TARGET/ramdisk.gz --base 0x10000000 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --pagesize 2048 -o ./$TARGET/boot.img;
 	echo "Build with stock dt.img";
 fi;
 

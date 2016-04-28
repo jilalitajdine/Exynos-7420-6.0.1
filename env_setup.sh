@@ -103,21 +103,27 @@ export SUB_ARCH=arm64;
 # SM-N920 C/CD/G/I
 if [ "$TARGET" = "N920C" ] ; then
 	export KERNEL_CONFIG="SkyHigh_N920C_defconfig";
+	board="SYSMAGIC000KU";
 # SM-N920 P (Sprint)
 elif [ "$TARGET" = "N920P" ] ; then
 	export KERNEL_CONFIG="SkyHigh_N920P_defconfig";
+	board="SYSMAGIC000KU";
 # SM-N920 T/W8
 elif [ "$TARGET" = "N920T" ] ; then
 	export KERNEL_CONFIG="SkyHigh_N920T_defconfig";
+	board="SYSMAGIC000KU";
 # SM-N9200 HK
 elif [ "$TARGET" = "N9200" ] ; then
 	export KERNEL_CONFIG="SkyHigh_N9200_HK_defconfig";
+	board="FPRPNLCC000KU";
 # SM-G928 C/F/G/I
 elif [ "$TARGET" = "G928C" ] ; then
 	export KERNEL_CONFIG="SkyHigh_G928C_defconfig";
+	board="SYSMAGIC000KU";
 # SM-G928 T/W8
 elif [ "$TARGET" = "G928T" ] ; then
 	export KERNEL_CONFIG="SkyHigh_G928T_defconfig";
+	board="SYSMAGIC000KU";
 fi;
 
 
