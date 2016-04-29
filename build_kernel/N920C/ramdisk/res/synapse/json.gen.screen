@@ -21,18 +21,36 @@ cat << CTAG
 		height:1
 	}},
 	{ SDescription:{
-		description:"NOTE: Ensure PowerSuspend 'State' is DISABLED"
+		description:"NOTE: Ensure PowerSuspend driver 'State' is DISABLED"
 	}},
 	{ SSpacer:{
 		height:1
 	}},
 	{ SOptionList:{
-		description:"Default is Disabled.\n",
+		description:" ",
 		default:0,
 		action:"generic /sys/sweep2sleep/sweep2sleep",
 		values:{
 			0:"Disabled", 1:"Enabled"
 		}
+	}},
+	{ SPane:{
+		title:"Touchkey Power Mode",
+		description:"Turn off the display by pressing both 'recent' and 'back' keys at the same time."
+	}},
+	{ SSpacer:{
+		height:1
+	}},
+	{ SOptionList:{
+		description:" ",
+		default:0,
+		action:"generic /sys/devices/virtual/sec/sec_touchkey/key_power_mode",
+		values:{
+			0:"Disabled", 1:"Enabled"
+		}
+	}},
+	{ SSpacer:{
+		height:1
 	}},
 	{ SSpacer:{
 		height:1
